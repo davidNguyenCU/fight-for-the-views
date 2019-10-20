@@ -8,6 +8,7 @@ public class hitZone : MonoBehaviour
     //Make sure to assign this in the Inspector window
     Collider m_Collider;
     Vector3 m_Point;
+    public gameManagerA gm;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,23 +32,18 @@ public class hitZone : MonoBehaviour
                 && (other.GetComponent<Rigidbody>().position.y > -12)
                 && (other.GetComponent<arrow>().direction == "down"))
             {
-                print("Hit!");
-                gameManagerA.comboCount++;
-                gameManagerA.changePhase();
+                hit();
                 other.GetComponent<arrow>().despawn(false);
             }
             else
             {
                 if (other.GetComponent<arrow>().direction == "down")
                 {
-                    print("Partial Hit");
-                    gameManagerA.comboCount++;
-                    gameManagerA.changePhase();
+                    partialHit();
                 }
                 else
                 {
-                    gameManagerA.comboCount = -1;
-                    gameManagerA.changePhase();
+                    miss();
                 }
                     
                 other.GetComponent<arrow>().despawn(false);
@@ -60,23 +56,18 @@ public class hitZone : MonoBehaviour
                 && (other.GetComponent<Rigidbody>().position.y > -12)
                 && (other.GetComponent<arrow>().direction == "up"))
             {
-                print("Hit!");
-                gameManagerA.comboCount++;
-                gameManagerA.changePhase();
+                hit();
                 other.GetComponent<arrow>().despawn(false);
             }
             else
             {
                 if (other.GetComponent<arrow>().direction == "up")
                 {
-                    print("Partial Hit");
-                    gameManagerA.comboCount++;
-                    gameManagerA.changePhase();
+                    partialHit();
                 }
                 else
                 {
-                    gameManagerA.comboCount = -1;
-                    gameManagerA.changePhase();
+                    miss();
                 }
                 other.GetComponent<arrow>().despawn(false);
             }
@@ -88,24 +79,18 @@ public class hitZone : MonoBehaviour
                 && (other.GetComponent<Rigidbody>().position.y > -12)
                 && (other.GetComponent<arrow>().direction == "left"))
             {
-                print("Hit!");
-                gameManagerA.comboCount++;
-                gameManagerA.changePhase();
+                hit();
                 other.GetComponent<arrow>().despawn(false);
-
             }
             else
             {
                 if (other.GetComponent<arrow>().direction == "left")
                 {
-                    print("Partial Hit");
-                    gameManagerA.comboCount++;
-                    gameManagerA.changePhase();
+                    partialHit();
                 }
                 else
                 {
-                    gameManagerA.comboCount = -1;
-                    gameManagerA.changePhase();
+                    miss();
                 }
                 other.GetComponent<arrow>().despawn(false);
             }
@@ -117,34 +102,39 @@ public class hitZone : MonoBehaviour
                 && (other.GetComponent<Rigidbody>().position.y > -12)
                 && (other.GetComponent<arrow>().direction == "right"))
             {
-                print("Hit!");
-                gameManagerA.comboCount++;
-                gameManagerA.changePhase();
-                other.GetComponent<arrow>().despawn(false);
-
+                hit();
+                other.GetComponent<arrow>().despawn(false);                
             }
             else
             {
                 if (other.GetComponent<arrow>().direction == "right")
                 {
-                    print("Partial Hit");
-                    gameManagerA.comboCount++;
-                    gameManagerA.changePhase();
+                    partialHit();
                 }
                 else
                 {
-                    gameManagerA.comboCount = -1;
-                    gameManagerA.changePhase();
+                    miss();
                 }
                 other.GetComponent<arrow>().despawn(false);
             }
         }
     }
 
+    void hit(){
+        gm.hit();
+    }
+
+    void partialHit(){
+        gm.partialHit();
+    }
+
+    void miss(){
+        gm.miss();
+    }
+
     private void OnTriggerExit(Collider other)
     {
-        gameManagerA.comboCount = -1;
-        gameManagerA.changePhase();
+        miss();
         other.GetComponent<arrow>().despawn(true);
     }
 }

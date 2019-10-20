@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class gameManagerA : MonoBehaviour
 {
@@ -9,14 +10,14 @@ public class gameManagerA : MonoBehaviour
     //2 = Damaging
     //3 = Blocking
     //4 = Parrying
-    public static int state = 1;
+    int state = 1;
 
-    public static int comboCount = 0;
+    int comboCount = 0;
 
     public float spawnInterval;
 
-    public static int playerHealth = 3;
-    public static int enemyHealth = 1;
+    int playerHealth = 3;
+    int enemyHealth = 1;
 
     int enemyHealthMax = 5;
     int playerHealthMax = 3;
@@ -29,6 +30,7 @@ public class gameManagerA : MonoBehaviour
     public avatarAnimate av1;
     public HealthScript3 playerHealthManager;
     public HealthScript5 enemyHealthManager;
+    public StateImageManager stateImgManager;
 
     // Start is called before the first frame update
     void Start()
@@ -75,18 +77,33 @@ public class gameManagerA : MonoBehaviour
         enemyHealthManager.health = enemyHealth;
     }
 
+    public void hit(){
+        comboCount++;
+        changePhase();
+    }
+    public void partialHit(){
+        comboCount++;
+        changePhase();
+    }
+    public void miss(){
+        comboCount = -1;
+        changePhase();
+    }
 
-    public static void changePhase()
+
+    public void changePhase()
     {
         if (state == 1)//Attacking
         {
             if (comboCount % 5 == 0)
             {
                 state = 2; //Transition to Damaging
+                stateImgManager.setDamage();
             }
             if (comboCount == -1)
             {
                 state = 3; //Transition to Blocking
+                stateImgManager.setBlock();
             }
         }
 
@@ -95,11 +112,14 @@ public class gameManagerA : MonoBehaviour
             if (comboCount % 5 == 0)
             {
                 enemyHealth -= 1;
+                
                 state = 1;
+                stateImgManager.setAttack();
             }
             if (comboCount == -1)
             {
                 state = 3; //Transition to Blocking
+                stateImgManager.setBlock();
             }
         }
 
@@ -108,6 +128,7 @@ public class gameManagerA : MonoBehaviour
             if (comboCount % 5 == 0)
             {
                 state = 4; //Transition to parrying
+                stateImgManager.setParry();
             }
             if (comboCount == -1)
             {
@@ -120,11 +141,13 @@ public class gameManagerA : MonoBehaviour
         {
             if (comboCount % 5 == 0)
             {
-                state = 1; //Transition to parrying
+                state = 1; //Transition to attack
+                stateImgManager.setAttack(); 
             }
             if (comboCount == -1)
             {
                 state = 3; //Transition back to blocking
+                stateImgManager.setBlock(); 
             }
         }
     }
