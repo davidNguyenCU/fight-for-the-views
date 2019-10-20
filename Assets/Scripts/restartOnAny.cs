@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartingGame : MonoBehaviour
+public class restartOnClick : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,16 +14,9 @@ public class StartingGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            Application.Quit();
-            print("QUIT");
-        }
-
-
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.anyKeyDown)
         {
-            SceneManager.LoadScene("CoreScene");
+            SceneManager.LoadScene("Title");
         }
     }
 }
