@@ -19,29 +19,45 @@ public class avatarAnimate : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.W)){
-            anim.SetTrigger("Hurt");
+            triggerHurt();   
         }
         
         if(Input.GetKeyDown(KeyCode.A)){
-            anim.SetTrigger("KO");
-            anim.SetBool("Dead", true);
+            triggerKO();
         }
 
         if(Input.GetKeyDown(KeyCode.S)){
-            anim.SetTrigger("Punch");
+            triggerPunch();
         }
         
         if(Input.GetKeyDown(KeyCode.D)){
-            anim.SetBool("Dead", false);
+        anim.SetBool("Dead", false);
         }
 
-        //anim.SetInteger("PunchTransition", (anim.GetInteger("PunchTransition") + 1) % 3);
+        
+    }
 
-        anim.SetInteger("PunchTransition", 0);
+    public void triggerHurt(){
+        anim.SetTrigger("Hurt");
+    }
 
-        anim.SetBool("PunchUp", false);
-        if(Time.frameCount % 30 == 0){
-            anim.SetBool("PunchUp", true);
+    public void triggerPunch(){
+        float punchRNG = Random.Range(0.0f, 100.0f);
+        
+        //Debug.Log(punchRNG);
+        
+        if(punchRNG > 90.0f){
+            anim.SetInteger("PunchTransition", 0);
+        }else if(punchRNG > 45.0f){
+            anim.SetInteger("PunchTransition", 1);
+        }else{
+            anim.SetInteger("PunchTransition", 2);
         }
+        anim.SetTrigger("Punch");
+    }
+
+    public void triggerKO(){
+        anim.SetBool("Dead", true);
+        anim.SetTrigger("KO");
     }
 }
