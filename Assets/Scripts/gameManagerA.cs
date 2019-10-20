@@ -95,6 +95,7 @@ public class gameManagerA : MonoBehaviour
     {
         if (state == 1)//Attacking
         {
+            av1.triggerBlock();
             if (comboCount % 5 == 0)
             {
                 state = 2; //Transition to Damaging
@@ -109,10 +110,11 @@ public class gameManagerA : MonoBehaviour
 
         else if (state == 2)//Damaging
         {
+            av1.triggerBlock();
             if (comboCount % 5 == 0)
             {
                 enemyHealth -= 1;
-                
+                av1.triggerHurt();
                 state = 1;
                 stateImgManager.setAttack();
             }
@@ -125,6 +127,7 @@ public class gameManagerA : MonoBehaviour
 
         else if (state == 3)//Blocking
         {
+            av1.triggerPunch();
             if (comboCount % 5 == 0)
             {
                 state = 4; //Transition to parrying
@@ -139,6 +142,7 @@ public class gameManagerA : MonoBehaviour
 
         else if (state == 4) //Parrying
         {
+            av1.triggerPunch();
             if (comboCount % 5 == 0)
             {
                 state = 1; //Transition to attack
