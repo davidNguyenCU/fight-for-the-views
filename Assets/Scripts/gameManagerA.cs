@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class gameManagerA : MonoBehaviour
 {
@@ -15,10 +16,13 @@ public class gameManagerA : MonoBehaviour
     public float spawnInterval;
 
     public static int playerHealth = 3;
-    public static int enemyHealth = 5;
+    public static int enemyHealth = 1;
 
     int enemyHealthMax = 5;
     int playerHealthMax = 3;
+
+    bool gameEnd = false;
+    float timeUntilEndCard = 3;
 
     public GameObject toSpawn;
 
@@ -35,13 +39,24 @@ public class gameManagerA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(gameEnd){
+            if(timeUntilEndCard <= 0){
+                SceneManager.LoadScene("EndCard");
+            }else{
+                timeUntilEndCard -= Time.deltaTime;
+            }
+
+            return;
+        }
+
         if(Input.GetKeyDown(KeyCode.W)){
             enemyHealth--;
             playerHealth--;
             if(enemyHealth > 0){
                 av1.triggerHurt();
             }else{
-                av1.triggerKO();
+                av1.triggerKO();   
+                gameEnd = true;
             } 
         }
         
