@@ -15,8 +15,8 @@ public class gameManagerA : MonoBehaviour
 
     public float spawnInterval;
 
-    public static int playerHealth = 3;
-    public static int enemyHealth = 1;
+    public static int playerHealth = 1;
+    public static int enemyHealth = 4;
 
     int enemyHealthMax = 5;
     int playerHealthMax = 3;
@@ -39,9 +39,9 @@ public class gameManagerA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameEnd){
+        if(gameEnd && enemyHealth==0){
             if(timeUntilEndCard <= 0){
-                SceneManager.LoadScene("EndCard");
+                SceneManager.LoadScene("EndCardWin");
             }else{
                 timeUntilEndCard -= Time.deltaTime;
             }
@@ -49,15 +49,35 @@ public class gameManagerA : MonoBehaviour
             return;
         }
 
-        if(Input.GetKeyDown(KeyCode.W)){
+        if (gameEnd && playerHealth <= 0)
+        {
+            if (timeUntilEndCard <= 0)
+            {
+                SceneManager.LoadScene("EndCardLose");
+            }
+            else
+            {
+                timeUntilEndCard -= Time.deltaTime;
+            }
+
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.W)){
             enemyHealth--;
             playerHealth--;
             if(enemyHealth > 0){
                 av1.triggerHurt();
-            }else{
+            }
+            else {
                 av1.triggerKO();   
                 gameEnd = true;
             } 
+        }
+
+        if (playerHealth <= 0)
+        {
+            gameEnd = true;
         }
         
 
