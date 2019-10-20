@@ -42,4 +42,12 @@ public class avatarAnimate : MonoBehaviour
         anim.SetBool("Dead", true);
         anim.SetTrigger("KO");
     }
+
+    public void triggerBlock(){
+        anim.SetTrigger("Block");
+    }
+
+    public void triggerIdle(){
+        anim.SetTrigger("Idle");
+    }
 }
