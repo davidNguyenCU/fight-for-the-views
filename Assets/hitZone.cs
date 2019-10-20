@@ -32,15 +32,24 @@ public class hitZone : MonoBehaviour
                 && (other.GetComponent<arrow>().direction == "down"))
             {
                 print("Hit!");
+                GameManager.comboCount++;
+                GameManager.changePhase();
                 other.GetComponent<arrow>().despawn(false);
-
             }
             else
             {
                 if (other.GetComponent<arrow>().direction == "down")
+                {
                     print("Partial Hit");
+                    GameManager.comboCount++;
+                    GameManager.changePhase();
+                }
                 else
-                    print("Super Miss!");
+                {
+                    GameManager.comboCount = -1;
+                    GameManager.changePhase();
+                }
+                    
                 other.GetComponent<arrow>().despawn(false);
             }
         }
@@ -52,15 +61,23 @@ public class hitZone : MonoBehaviour
                 && (other.GetComponent<arrow>().direction == "up"))
             {
                 print("Hit!");
+                GameManager.comboCount++;
+                GameManager.changePhase();
                 other.GetComponent<arrow>().despawn(false);
-
             }
             else
             {
                 if (other.GetComponent<arrow>().direction == "up")
+                {
                     print("Partial Hit");
+                    GameManager.comboCount++;
+                    GameManager.changePhase();
+                }
                 else
-                    print("Super Miss!");
+                {
+                    GameManager.comboCount = -1;
+                    GameManager.changePhase();
+                }
                 other.GetComponent<arrow>().despawn(false);
             }
         }
@@ -72,15 +89,24 @@ public class hitZone : MonoBehaviour
                 && (other.GetComponent<arrow>().direction == "left"))
             {
                 print("Hit!");
+                GameManager.comboCount++;
+                GameManager.changePhase();
                 other.GetComponent<arrow>().despawn(false);
 
             }
             else
             {
                 if (other.GetComponent<arrow>().direction == "left")
+                {
                     print("Partial Hit");
+                    GameManager.comboCount++;
+                    GameManager.changePhase();
+                }
                 else
-                    print("Super Miss!");
+                {
+                    GameManager.comboCount = -1;
+                    GameManager.changePhase();
+                }
                 other.GetComponent<arrow>().despawn(false);
             }
         }
@@ -92,15 +118,24 @@ public class hitZone : MonoBehaviour
                 && (other.GetComponent<arrow>().direction == "right"))
             {
                 print("Hit!");
+                GameManager.comboCount++;
+                GameManager.changePhase();
                 other.GetComponent<arrow>().despawn(false);
 
             }
             else
             {
                 if (other.GetComponent<arrow>().direction == "right")
+                {
                     print("Partial Hit");
+                    GameManager.comboCount++;
+                    GameManager.changePhase();
+                }
                 else
-                    print("Super Miss!");
+                {
+                    GameManager.comboCount = -1;
+                    GameManager.changePhase();
+                }
                 other.GetComponent<arrow>().despawn(false);
             }
         }
@@ -108,7 +143,8 @@ public class hitZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        print("Super Miss!");
+        GameManager.comboCount = -1;
+        GameManager.changePhase();
         other.GetComponent<arrow>().despawn(true);
     }
 }
