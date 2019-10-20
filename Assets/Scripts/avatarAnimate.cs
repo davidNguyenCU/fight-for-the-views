@@ -24,15 +24,24 @@ public class avatarAnimate : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.A)){
             anim.SetTrigger("KO");
+            anim.SetBool("Dead", true);
         }
 
         if(Input.GetKeyDown(KeyCode.S)){
             anim.SetTrigger("Punch");
         }
         
-        anim.SetInteger("PunchTransition", (anim.GetInteger("PunchTransition") + 1) % 3);        
-//        if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99){
-  //          anim.SetTrigger("AnimEnd");
-    //    }
+        if(Input.GetKeyDown(KeyCode.D)){
+            anim.SetBool("Dead", false);
+        }
+
+        //anim.SetInteger("PunchTransition", (anim.GetInteger("PunchTransition") + 1) % 3);
+
+        anim.SetInteger("PunchTransition", 0);
+
+        anim.SetBool("PunchUp", false);
+        if(Time.frameCount % 30 == 0){
+            anim.SetBool("PunchUp", true);
+        }
     }
 }
