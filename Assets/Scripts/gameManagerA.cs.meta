@@ -3,7 +3,12 @@ guid: aa2f4c629937a3e46983550df2ab60a6
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - toSpawn: {fileID: 1119060628818420801, guid: ee824b83e0e2917448d7ad84e7ed6c25,
+      type: 3}
+  - av1: {instanceID: 0}
+  - playerHealthManager: {instanceID: 0}
+  - enemyHealthManager: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
