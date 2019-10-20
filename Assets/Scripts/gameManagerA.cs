@@ -26,6 +26,7 @@ public class gameManagerA : MonoBehaviour
     float timeUntilEndCard = 3;
 
     public GameObject toSpawn;
+    public GameObject viewerInstance;
 
     public avatarAnimate av1;
     public HealthScript3 playerHealthManager;
@@ -102,6 +103,11 @@ public class gameManagerA : MonoBehaviour
         if(gameEnd){
             return;
         }
+        if (comboCount != -1)
+        {
+            spawnViewer();
+        }
+
         if (state == 1)//Attacking
         {
             av1.triggerBlock();
@@ -163,6 +169,13 @@ public class gameManagerA : MonoBehaviour
                 stateImgManager.setBlock(); 
             }
         }
+
+        
+    }
+
+    void spawnViewer()
+    {
+        Instantiate(viewerInstance, new Vector3(Random.Range(-91.8f, -27.1f), Random.Range(21.0f, 154.5f), -300), Quaternion.identity);
     }
 
     void spawnArrow()
