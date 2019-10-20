@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CoreScene.unity
     guid: 6d70009fe8cf9ec4eacd9cc88a121cd6
   - enabled: 1
-    path: Assets/Scenes/EndCard.unity
-    guid: 4217cf2d9e6aec448bccb6e2ec26210e
+    path: Assets/Scenes/EndCardWin.unity
+    guid: 667d2267d4593e140ac567cded3539a8
+  - enabled: 1
+    path: Assets/Scenes/EndCardLose.unity
+    guid: 94ac114b23ed94048b5f74aed6091c93
   m_configObjects: {}

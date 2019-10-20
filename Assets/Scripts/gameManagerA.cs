@@ -16,8 +16,8 @@ public class gameManagerA : MonoBehaviour
 
     public float spawnInterval;
 
+    int enemyHealth = 5;
     int playerHealth = 3;
-    int enemyHealth = 1;
 
     int enemyHealthMax = 5;
     int playerHealthMax = 3;
@@ -41,9 +41,10 @@ public class gameManagerA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameEnd){
-            if(timeUntilEndCard <= 0){
-                SceneManager.LoadScene("EndCard");
+        
+        if( gameEnd && enemyHealth <= 0 ){
+            if( timeUntilEndCard <= 0 ){
+                SceneManager.LoadScene("EndCardWin");
             }else{
                 timeUntilEndCard -= Time.deltaTime;
             }
@@ -51,22 +52,27 @@ public class gameManagerA : MonoBehaviour
             return;
         }
 
-        if(Input.GetKeyDown(KeyCode.W)){
-            enemyHealth--;
-            playerHealth--;
-            if(enemyHealth > 0){
-                av1.triggerHurt();
-            }else{
-                av1.triggerKO();   
-                gameEnd = true;
-            } 
-        }
-        
+        if (gameEnd && playerHealth <= 0)
+        {
+            if (timeUntilEndCard <= 0){
+                SceneManager.LoadScene("EndCardLose");
+            }
+            else
+            {
+                timeUntilEndCard -= Time.deltaTime;
+            }
 
-        if(Input.GetKeyDown(KeyCode.A)){
-            enemyHealth++;
-            playerHealth++;            
-            av1.triggerPunch();
+            return;
+        }
+
+        if (playerHealth <= 0)
+        {
+            gameEnd = true;
+        }
+
+        if(enemyHealth <= 0){
+            gameEnd = true;
+            av1.triggerKO();
         }
 
         if(playerHealth > playerHealthMax) playerHealth = playerHealthMax;
@@ -93,6 +99,9 @@ public class gameManagerA : MonoBehaviour
 
     public void changePhase()
     {
+        if(gameEnd){
+            return;
+        }
         if (state == 1)//Attacking
         {
             av1.triggerBlock();
@@ -159,6 +168,7 @@ public class gameManagerA : MonoBehaviour
     void spawnArrow()
     {
         Instantiate(toSpawn, new Vector3(-100, 144, 200), Quaternion.AngleAxis(90, Vector3.up));
+        /*
         print(comboCount);
         if (state == 1)
             print("Attacking");
@@ -171,5 +181,6 @@ public class gameManagerA : MonoBehaviour
 
         if (state == 4)
             print("Parrying");
+            */
     }
 }
