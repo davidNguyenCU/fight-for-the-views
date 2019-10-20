@@ -16,7 +16,7 @@ public class StartingGame : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            SceneManager.LoadScene("MainSceneAvatar");
+            SceneManager.LoadScene("CoreScene");
         }
     }
 }

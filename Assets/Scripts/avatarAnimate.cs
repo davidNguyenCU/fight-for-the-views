@@ -6,37 +6,17 @@ using UnityEngine;
 public class avatarAnimate : MonoBehaviour
 {
     Animator anim;
-    public gameManagerA gm;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        /*
-        if(Input.GetKeyDown(KeyCode.W)){
-            triggerHurt();   
-        }
-        
-        if(Input.GetKeyDown(KeyCode.A)){
-            triggerKO();
-        }
-
-        if(Input.GetKeyDown(KeyCode.S)){
-            triggerPunch();
-        }
-        
-        if(Input.GetKeyDown(KeyCode.D)){
-            anim.SetBool("Dead", false);
-        }
-
-        */
     }
 
     public void triggerHurt(){
