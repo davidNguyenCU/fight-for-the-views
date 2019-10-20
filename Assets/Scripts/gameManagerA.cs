@@ -28,6 +28,10 @@ public class gameManagerA : MonoBehaviour
     public GameObject toSpawn;
     public GameObject viewerInstance;
 
+    int numViewers = 1;
+    
+    public Text viewerText;
+
     public avatarAnimate av1;
     public HealthScript3 playerHealthManager;
     public HealthScript5 enemyHealthManager;
@@ -106,6 +110,8 @@ public class gameManagerA : MonoBehaviour
         if (comboCount != -1)
         {
             spawnViewer();
+            numViewers++;
+            viewerText.text = "Viewers: " + numViewers;
         }
 
         if (state == 1)//Attacking
