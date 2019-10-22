@@ -1,4 +1,6 @@
-# rhythm_fighter
+# fight-for-the-views
+
+Carleton University Arcade Jam 2019 Submission
 
 Made by David, Eli, Thani
 
